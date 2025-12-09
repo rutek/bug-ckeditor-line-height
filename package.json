@@ -1,0 +1,9 @@
+{
+  "type": "module",
+  "devDependencies": {
+    "@types/node": "^24.10.2"
+  },
+  "dependencies": {
+    "jose": "^6.1.3"
+  }
+}
