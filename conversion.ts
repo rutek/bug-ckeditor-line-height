@@ -98,6 +98,11 @@ async function main(): Promise<void> {
     console.log('-------------------------');
     console.log('# Converted back to DOCX, status:', docxConversionResult.status);
 
+    // Store the file as "step_1_output.docx" for manual verification if needed
+    const arrayBuffer = await docxFromHtml.arrayBuffer();
+    fs.writeFileSync('step_1_output.docx', Buffer.from(arrayBuffer));
+    console.log('DOCX file saved as step_1_output.docx');
+
     // STEP 2::Convert it to HTML once again and print it to see line-height difference
     const formData = new FormData();
     formData.append('config', JSON.stringify(DOCX_TO_HTML_OPTIONS));
@@ -117,6 +122,10 @@ async function main(): Promise<void> {
     console.log('-------------------------');
     console.log('# Final HTML after round-trip DOCX conversion:');
     console.log(finalHtmlFile);
+
+    // Store the file as "step_2_output.html" for manual verification if needed
+    fs.writeFileSync('step_2_output.html', finalHtmlFile, 'utf-8');
+    console.log('HTML file saved as step_2_output.html');
 }
 
 main();
